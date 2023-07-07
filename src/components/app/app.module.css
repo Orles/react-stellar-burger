@@ -4,4 +4,23 @@
   height: 100vh;
   background-color: #131316;
   color: #f2f2f3;
+  margin-bottom: 100px;
+}
+
+.main {
+  max-width: 1280px;
+  display: flex;
+  gap: 40px;
+  margin: 0 auto;
+}
+
+.section {
+  width: 600px;
+}
+
+.section:nth-child(2) {
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
