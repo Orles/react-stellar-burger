@@ -10,12 +10,13 @@ function App() {
   React.useEffect(() => {
     const getData = async () => {
       
-      const res = await fetch(`https://norma.nomoreparties.space/api/ingredients`);
-      const data = await res.json();
-      setState(data.data);
+      fetch(`https://norma.nomoreparties.space/api/ingredients`)
+      .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
+      .then(res => setState(res.data))
+      .catch(err => console.log(err))
+      // const data = res.ok ? res.json() : res.json().then((err) => Promise.reject(err))
     }
-
-    getData();
+    getData()
   }, [])
   
   return (

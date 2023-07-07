@@ -81,7 +81,17 @@ function BurgerIngridients(props) {
 }
 
 BurgerIngridients.prototype = {
-    data: PropTypes.array
+    data: PropTypes.arrayOf(PropTypes.shape({
+        image: PropTypes.string,
+        name: PropTypes.string,
+        calories: PropTypes.number,
+        proteins: PropTypes.number,
+        fat: PropTypes.number,
+        carbohydrates: PropTypes.number,
+        _id: PropTypes.string,
+        type: PropTypes.string,
+        price: PropTypes.number,
+    }))
 }
 
 export default BurgerIngridients;
