@@ -47,7 +47,7 @@ export function IngridientConstructor({ item, moveIngridient }) {
 
     return (
         <>
-            <li ref={dragDropRef} style={{opacity}} key={Math.random()} className={BurgerConstructorStyle.item}>
+            <li ref={dragDropRef} style={{opacity}} className={BurgerConstructorStyle.item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                     text={item.name}

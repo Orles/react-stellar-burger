@@ -103,7 +103,7 @@ function BurgerConstructor() {
                 {ingridient.map((item) => {
                     if (item !== 'bun') {
                         return (
-                            <IngridientConstructor key={Math.random()} item={item} moveIngridient={moveIngridient} />
+                            <IngridientConstructor key={item.key} item={item} moveIngridient={moveIngridient} />
                         )
                     }
                 })}
