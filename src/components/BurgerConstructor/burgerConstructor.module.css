@@ -1,11 +1,11 @@
 .list {
     margin: 0;
     padding: 0;
-    max-width: 568px;
+    width: 568px;
     list-style: none;
-    max-height: 464px;
     overflow: auto;
     display: flex;
+    height: 464px;
     gap: 16px;
     flex-direction: column;
 }
