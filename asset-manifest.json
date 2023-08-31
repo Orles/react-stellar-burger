@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/orles.github.io/react-stellar-burger/static/css/main.78c14417.css",
-    "main.js": "/orles.github.io/react-stellar-burger/static/js/main.55954613.js",
+    "main.css": "/orles.github.io/react-stellar-burger/static/css/main.b79ce4e4.css",
+    "main.js": "/orles.github.io/react-stellar-burger/static/js/main.512a6568.js",
     "static/js/787.438bf4e7.chunk.js": "/orles.github.io/react-stellar-burger/static/js/787.438bf4e7.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "/orles.github.io/react-stellar-burger/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/orles.github.io/react-stellar-burger/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -11,12 +11,12 @@
     "static/media/iceland.woff": "/orles.github.io/react-stellar-burger/static/media/iceland.77ad7fc2baffd9305538.woff",
     "static/media/iceland.woff2": "/orles.github.io/react-stellar-burger/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
     "index.html": "/orles.github.io/react-stellar-burger/index.html",
-    "main.78c14417.css.map": "/orles.github.io/react-stellar-burger/static/css/main.78c14417.css.map",
-    "main.55954613.js.map": "/orles.github.io/react-stellar-burger/static/js/main.55954613.js.map",
+    "main.b79ce4e4.css.map": "/orles.github.io/react-stellar-burger/static/css/main.b79ce4e4.css.map",
+    "main.512a6568.js.map": "/orles.github.io/react-stellar-burger/static/js/main.512a6568.js.map",
     "787.438bf4e7.chunk.js.map": "/orles.github.io/react-stellar-burger/static/js/787.438bf4e7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.78c14417.css",
-    "static/js/main.55954613.js"
+    "static/css/main.b79ce4e4.css",
+    "static/js/main.512a6568.js"
   ]
 }
