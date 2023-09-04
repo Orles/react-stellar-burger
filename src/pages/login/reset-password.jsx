@@ -16,7 +16,8 @@ function ResetPassword() {
         password: '',
     })
     const inputRef = React.useRef(null);
-    const onClick = () => {
+    const onClick = (e) => {
+        e.preventDefault();
         return resetPassword(value.password, value.token)
         .then((res) => {
             if (res.success) {
@@ -33,7 +34,7 @@ function ResetPassword() {
     return (
         <div className={style.contnent}>
             <h2 className="mb-6 text text_type_main-medium">Восстановление пароля</h2>
-            <form className={style.form}>
+            <form className={style.form} onSubmit={e => onClick(e)}>
             <Input
                     type={passwordShown ? "text" : "password"}
                     placeholder={'Введите новый пароль'}
@@ -66,10 +67,10 @@ function ResetPassword() {
                     size={'default'}
                     extraClass="ml-1"
                 />
-            </form>
-            <Button htmlType="button" type="primary" size="large" onClick={onClick}>
+            <Button htmlType="submit" type="primary" size="large">
             Сохранить
             </Button>
+            </form>
             <p className="text text_type_main-default mb-4 mt-20 text_color_inactive" >
             Вспомнили пароль? <Link className={style.link} to='/login'>Войти</Link>
             </p>

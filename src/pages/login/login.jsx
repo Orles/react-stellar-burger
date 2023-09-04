@@ -16,13 +16,14 @@ function Login() {
         password: '',
     })
     const inputRef = React.useRef(null)
-    const onClick = () => {
+    const onClick = (e) => {
+        e.preventDefault();
         dispatch(login(value.email, value.password));
     };
     return (
         <div className={style.contnent}>
             <h2 className="mb-6 text text_type_main-medium">Вход</h2>
-            <form className={style.form}>
+            <form className={style.form} onSubmit={e => onClick(e)}>
                 <Input
                     type={'email'}
                     placeholder={'E-mail'}
@@ -55,10 +56,10 @@ function Login() {
                     size={'default'}
                     extraClass="ml-1"
                 />
-            </form>
-            <Button htmlType="button" type="primary" size="large" onClick={onClick}>
+            <Button htmlType="submit" type="primary" size="large">
                 Войти
             </Button>
+            </form>
             <p className="text text_type_main-default mb-4 mt-20 text_color_inactive" >
                 Вы — новый пользователь? <Link className={style.link} to='/register'>Зарегистрироваться</Link>
             </p>

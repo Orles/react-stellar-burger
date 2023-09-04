@@ -149,7 +149,7 @@ const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken")
     })
-  }).then(res => onResponce(res));
+  }).then(res => onResponce(res))
 };
 
 const fetchWithRefresh = async (url, options) => {
@@ -288,6 +288,13 @@ export const userUpdates = (email, password, name) => {
           type: SET_USER,
           payload: res.user
         });
+        refreshToken()
+        .then((res) => {
+          if(res.success) {
+            localStorage.setItem("refreshToken", res.refreshToken);
+            localStorage.setItem("accessToken", res.accessToken);
+          }
+        })
       } else {
         return Promise.reject("Ошибка данных с сервера");
       }

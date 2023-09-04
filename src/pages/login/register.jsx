@@ -35,14 +35,15 @@ function Register() {
     //     setName(evt.target.value);
     // };
 
-    const onClick = () => {
+    const onClick = (e) => {
+        e.preventDefault();
         dispatch(registerUser(value.name, value.email, value.password));
     };
 
     return (
         <div className={style.contnent}>
             <h2 className="mb-6 text text_type_main-medium">Регистрация</h2>
-            <form className={style.form}>
+            <form className={style.form} onSubmit={e => onClick(e)}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
@@ -99,10 +100,10 @@ function Register() {
                     size={'default'}
                     extraClass="ml-1"
                 />
-            </form>
-            <Button htmlType="button" type="primary" size="large" onClick={onClick}>
+            <Button htmlType="submit" type="primary" size="large">
                 Зарегистрироваться
             </Button>
+            </form>
             <p className="text text_type_main-default mb-4 mt-20 text_color_inactive" >
                 Уже зарегистрированы? <Link className={style.link} to='/login'>Войти</Link>
             </p>

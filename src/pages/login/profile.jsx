@@ -15,7 +15,7 @@ function Profile() {
     const [value, setValue] = React.useState({
         email: user.email,
         text: user.name,
-        password: '******'
+        password: ''
     })
     const [passwordShown, setPasswordShown] = React.useState(true);
     const togglePassword = () => {
@@ -32,19 +32,24 @@ function Profile() {
         dispatch(out());
     }
 
-    function onClick() {
-        dispatch(userUpdates(value.email, value.password, value.text))
+    function onClick(e) {
+        e.preventDefault();
+        dispatch(userUpdates(value.email, value.password, value.text));
+        setValue({
+            ...value,
+            password: ''
+        })
     }
 
     function cancellation() {
         setValue({
             email: user.email,
             text: user.name,
-            password: '******'
+            password: ''
         })
     }
 
-    const change = user.email !== value.email || user.name !== value.text || value.password !== '******';
+    const change = user.email !== value.email || user.name !== value.text || value.password !== ''
     // if (passwordShown === true) {
     //     document.removeEventListener('click', activ())
     // }
@@ -70,7 +75,7 @@ function Profile() {
                 <p className="text text_type_main-default text_color_inactive">В этом разделе вы можете изменить&nbsp;свои персональные данные</p>
             </div>
             {location.pathname === '/profile' &&
-            <form className={style.form}>
+            <form className={style.form} onSubmit={e => onClick(e)}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
@@ -114,7 +119,7 @@ function Profile() {
                         <Button htmlType="button" type="secondary" size="medium" onClick={cancellation}>
                             Отмена
                         </Button>
-                        <Button htmlType="button" type="primary" size="medium" onClick={onClick}>
+                        <Button htmlType="submit" type="primary" size="medium" >
                             Сохранить
                         </Button>
                     </div>
