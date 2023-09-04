@@ -1,12 +1,18 @@
 import IngredientDetailsStyle from './IngredientDetails.module.css'
 import PropTypes from 'prop-types';
-import {useSelector} from 'react-redux';
-
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 function IngredientDetails() {
-    const {ingridient} = useSelector(state => state.ingredientDetails)
+    const { burgerIngridients } = useSelector(state => state.burgerIngridients);
+    const {id} = useParams();
+    const ingridient = burgerIngridients.find((item) => {
+        return item._id === id
+    })
+    if (!ingridient) return null
+    // const { ingridient } = useSelector(state => state.ingredientDetails);
     return (
-        <>
+        <div className={`${IngredientDetailsStyle.page}`}>
             <h2 className={`${IngredientDetailsStyle.title} text text_type_main-large mt-10 ml-10`}>Детали ингредиента</h2>
             <img src={ingridient.image} alt={ingridient.name} className={`${IngredientDetailsStyle.img} mb-4`} />
             <p className='text text_type_main-medium mb-8'>{ingridient.name}</p>
@@ -28,7 +34,7 @@ function IngredientDetails() {
                     <p className='text text_type_main-default text_color_inactive'>{ingridient.carbohydrates}</p>
                 </li>
             </ul>
-        </>
+        </div>
     )
 }
 
@@ -40,7 +46,7 @@ IngredientDetails.prototype = {
         proteins: PropTypes.number,
         fat: PropTypes.number,
         carbohydrates: PropTypes.number
-      })
+    })
 }
 
 export default IngredientDetails;

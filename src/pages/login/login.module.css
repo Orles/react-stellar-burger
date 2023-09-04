@@ -1,0 +1,65 @@
+.contnent{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 180px;
+}
+
+.form {
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.text {
+    text-decoration: none;
+    color: white;
+}
+
+.link{
+    text-decoration: none;
+    color: rgba(76, 76, 255, 1);
+}
+
+.table{
+    display: flex;
+    flex-direction: row;
+    width: 1280px;
+    margin: 120px auto 0 auto;
+    gap: 60px;
+}
+
+.container{
+    max-width: 320px;
+}
+
+.list{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin-bottom: 80px;
+}
+
+.item {
+    height: 64px;
+}
+
+.a{
+    text-decoration: none;
+}
+
+.b{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.buttons {
+    align-self: self-end;
+}
+
+.active {
+    text-decoration: none;
+    color: white;
+}

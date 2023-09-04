@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.link {
+    text-decoration: none;
+    color: white;
+}
+
 .list {
     list-style: none;
     margin-left: auto;

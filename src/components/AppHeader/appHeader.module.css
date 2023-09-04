@@ -29,10 +29,17 @@
     gap: 8px;
 }
 
-.link:first-child {
-    color: #F2F2F3;
-}
-
 .link:last-child {
     justify-self: end;
+}
+
+.activlink:last-child {
+    justify-self: end;
+}
+
+.activlink {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    gap: 8px;
 }
