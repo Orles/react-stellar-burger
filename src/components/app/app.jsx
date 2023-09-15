@@ -18,19 +18,44 @@ import { checkUserAuth } from "../../utils/Api";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Order from "../../pages/login/order";
+import { WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS } from "../../services/actions/ordersAction";
+import { WS_CONNECTION_START_ALL_ORDERS, WS_SEND_MESSAGE_ALL_ORDERS } from "../../services/actions/allOrders";
+import Feed from "../../pages/login/feed";
 
 function App() {
-  const {ok} = useSelector((store) => store.user);
+  const { ok } = useSelector((store) => store.user);
+  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const location = useLocation();
   const background = location.state && location.state.background;
   const navigate = useNavigate();
   React.useEffect(
     () => {
-        dispatch(getBurgerIngridientsData());
-        dispatch(checkUserAuth());
+      dispatch(getBurgerIngridientsData());
+      dispatch(checkUserAuth());
+      dispatch({
+        type: WS_CONNECTION_START_ALL_ORDERS
+      })
+      dispatch({
+        type: WS_SEND_MESSAGE_ALL_ORDERS
+      })
     }, []
 );
+
+React.useEffect(
+  () => {
+    if (user) {
+      dispatch({
+        type: WS_CONNECTION_START_ORDERS
+      })
+      dispatch({
+        type: WS_SEND_MESSAGE_ORDERS
+      })
+    }
+  }, [user]
+)
+
 React.useEffect(
   () => {
     if (ok) {
@@ -39,26 +64,31 @@ React.useEffect(
   }, [ok]
 )
 
-  return (
-    <div className={styles.app}>
-        <AppHeader />
-        <Routes location={background || location}>
-          <Route path="/" element={<Home />} />
-          <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
-          <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
-          <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
-          <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
-          <Route path="/reset-password" element={<OnlyUnAuth component={ok ? <ResetPassword /> : <Navigate to='/forgot-password' replace/>} />} />
-          <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
-          <Route path="/profile/orders" element={<OnlyAuth component={<Profile />} />} />
-        </Routes>
-        {background && (
-          <Routes>
-            <Route path="/ingredients/:id" element={<Modal><IngredientDetailsPage /></Modal>} />
-          </Routes>
-        )}
-    </div>
-  );
+return (
+  <div className={styles.app}>
+    <AppHeader />
+    <Routes location={background || location}>
+      <Route path="/" element={<Home />} />
+      <Route path="/ingredients/:id" element={<IngredientDetailsPage />} />
+      <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
+      <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
+      <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
+      <Route path="/reset-password" element={<OnlyUnAuth component={ok ? <ResetPassword /> : <Navigate to='/forgot-password' replace />} />} />
+      <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+      <Route path="/profile/orders" element={<OnlyAuth component={<Profile />} />} />
+      <Route path="/feed" element={<Feed />} />
+      <Route path="/feed/:id" element={<Order />} />
+      <Route path="/profile/orders/:id" element={<OnlyAuth component={<Order />} />} />
+    </Routes>
+    {background && (
+      <Routes>
+        <Route path="/ingredients/:id" element={<Modal><IngredientDetailsPage /></Modal>} />
+        <Route path="/profile/orders/:id" element={<OnlyAuth component={<Modal><Order /></Modal>} />} />
+        <Route path="/feed/:id" element={<Modal><Order /></Modal>} />
+      </Routes>
+    )}
+  </div>
+);
 }
 
 export default App;

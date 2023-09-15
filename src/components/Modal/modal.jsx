@@ -7,13 +7,19 @@ import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import { ORDER_DETAILS_NO } from "../../services/actions/orderDetailsAction";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const modalRoot = document.getElementById("popup");
 function Modal({ children }) {
+  const location = useLocation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClose = () => {
-    navigate("/");
+    if (location.pathname ==="/") {
+      navigate("/")
+    } else {
+      navigate(-1)
+    }
     dispatch({
       type: ORDER_DETAILS_NO,
       payload: false
