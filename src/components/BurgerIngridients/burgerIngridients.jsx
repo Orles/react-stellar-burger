@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerIngridientsData } from '../../services/actions/burgerIngridientsAction';
 import { INGREDIENT_DETAILS_MODAL_OPEN, INGREDIENT_DETAILS_MODAL_CLOSE } from '../../services/actions/ingridienrDetailsAction';
 import { BURGER_CONSTRUCTOR_ADD_BUN } from '../../services/actions/burgerConstructorAction';
-
+import { Link, useLocation } from 'react-router-dom';
 
 function BurgerIngridients() {
     // const [i, setI] = React.useState([]);
@@ -19,6 +19,8 @@ function BurgerIngridients() {
     //         element.scrollIntoView({ behavior: 'smooth' });
     //     }
     // };
+
+    const location = useLocation();
 
     const { burgerIngridients } = useSelector(state => state.burgerIngridients);
 
@@ -108,10 +110,9 @@ function BurgerIngridients() {
                     {burgerIngridients.map((item) => {
                         if (item.type === 'bun') {
                             return (
-                                <Ingridient key={item._id} data={item} handleOpen={() => {
-                                    setIsOpen(true);
-                                    openClick(item);
-                                }} />
+                                <Link key={item._id} className={BurgerIngridientsStyle.link} to={`/ingredients/${item._id}`} state={{ background: location }}>
+                                <Ingridient data={item} />
+                                </Link>
                             )
                         }
                     })}
@@ -121,10 +122,9 @@ function BurgerIngridients() {
                     {burgerIngridients.map((item) => {
                         if (item.type === 'sauce') {
                             return (
-                                <Ingridient key={item._id} data={item} handleOpen={() => {
-                                    setIsOpen(true);
-                                    openClick(item);
-                                }} />
+                                <Link key={item._id} className={BurgerIngridientsStyle.link} to={`/ingredients/${item._id}`} state={{ background: location }}>
+                                <Ingridient data={item}/>
+                                </Link>
                             )
                         }
                     })}
@@ -134,22 +134,21 @@ function BurgerIngridients() {
                     {burgerIngridients.map((item) => {
                         if (item.type === 'main') {
                             return (
-                                <Ingridient key={item._id} data={item} handleOpen={() => {
-                                    setIsOpen(true);
-                                    openClick(item);
-                                }} />
+                                <Link key={item._id} className={BurgerIngridientsStyle.link} to={`/ingredients/${item._id}`} state={{ background: location }}>
+                                <Ingridient data={item}/>
+                                </Link>
                             )
                         }
                     })}
                 </ul>
             </div>
 
-            <Modal handleClose={() => {
+            {/* <Modal handleClose={() => {
                 setIsOpen(false);
                 closeClick();
                 }} isOpen={isOpen}>
                 <IngredientDetails />
-            </Modal>
+            </Modal> */}
         </>
     );
 }

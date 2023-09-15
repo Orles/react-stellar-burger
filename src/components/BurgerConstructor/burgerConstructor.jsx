@@ -8,12 +8,15 @@ import { BURGER_CONSTRUCTOR_ADD_BUN, BURGER_CONSTRUCTOR_ADD_INGRIDIENTS, BURGER_
 import { postOrdersDetailsIngredients } from '../../services/actions/orderDetailsAction';
 import { useDrop } from 'react-dnd';
 import { IngridientConstructor } from '../ingridientConstructor/ingridientConstructor';
+import { ORDER_DETAILS_OK } from '../../services/actions/orderDetailsAction';
+import { useNavigate } from 'react-router-dom';
 
 function BurgerConstructor() {
-    const [isOpen, setIsOpen] = React.useState(false);
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const {ok} = useSelector(state => state.orderDetails)
     const { burgerIngridients } = useSelector(state => state.burgerIngridients);
+    const user = useSelector((store) => store.user.user);
     const { bun } = useSelector(state => state.burgerConstructor)
     const { ingridient } = useSelector(state => state.burgerConstructor)
 
@@ -53,7 +56,15 @@ function BurgerConstructor() {
     let totalPrice = bunPrice + ingridientPrice;
 
     function click(ingridientId) {
-        dispatch(postOrdersDetailsIngredients(ingridientId));
+        if (user) {
+            dispatch(postOrdersDetailsIngredients(ingridientId));
+            dispatch({
+                type: ORDER_DETAILS_OK,
+                payload: true
+            })
+        } else {
+            navigate('/login')
+        }
     }
 
     const [, dropRef] = useDrop({
@@ -122,14 +133,13 @@ function BurgerConstructor() {
                     {totalPrice} <CurrencyIcon type="primary" />
                 </p>
                 <Button htmlType="button" type="primary" size="large" onClick={() => {
-                    setIsOpen(true);
                     click(ingridientId)
                     }}>
                     Оформить заказ
                 </Button>
-                <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-                    <OrderDetails handleClose={() => setIsOpen(false)} />
-                </Modal>
+                {ok && <Modal>
+                    <OrderDetails />
+                </Modal>}
             </div>
         </>
     )

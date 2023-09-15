@@ -27,17 +27,17 @@ function Ingridient(props) {
     })
 
     return (
-        <li key={props.data._id} ref={dragRef} className={BurgerIngridientsStyle.item} onClick={props.handleOpen}>
-            <img src={props.data.image} alt={props.data.name} className='mb-1' />
-            <p className={`${BurgerIngridientsStyle.text} text text_type_digits-default mb-2`}>
-                {props.data.price}
-                <CurrencyIcon type="primary" />
-            </p>
-            <h3 className={`${BurgerIngridientsStyle.title} text text_type_main-default`}>
-                {props.data.name}
-            </h3>
-            {count > 0 && <Counter count={count} size="default" extraClass="m-1" className={BurgerIngridientsStyle.Counter} />}
-        </li>
+            <li key={props.data._id} ref={dragRef} className={BurgerIngridientsStyle.item} onClick={props.handleOpen}>
+                <img src={props.data.image} alt={props.data.name} className='mb-1' />
+                <p className={`${BurgerIngridientsStyle.text} text text_type_digits-default mb-2`}>
+                    {props.data.price}
+                    <CurrencyIcon type="primary" />
+                </p>
+                <h3 className={`${BurgerIngridientsStyle.title} text text_type_main-default`}>
+                    {props.data.name}
+                </h3>
+                {count > 0 && <Counter count={count} size="default" extraClass="m-1" className={BurgerIngridientsStyle.Counter} />}
+            </li>
     )
 }
 
@@ -48,8 +48,9 @@ Ingridient.prototype = {
         type: PropTypes.string,
         price: PropTypes.number,
         image: PropTypes.string,
-        __v: PropTypes.number,}),
-    
+        __v: PropTypes.number,
+    }),
+
     handleOpen: PropTypes.func
 }
 
