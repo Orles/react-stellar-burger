@@ -41,7 +41,7 @@ function Ingridient(props) {
     )
 }
 
-Ingridient.prototype = {
+Ingridient.propTypes = {
     data: PropTypes.shape({
         _id: PropTypes.string,
         name: PropTypes.string,

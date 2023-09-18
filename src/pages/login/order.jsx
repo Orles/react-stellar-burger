@@ -6,20 +6,16 @@ import { useLocation } from "react-router-dom";
 
 function Order() {
     const { orders } = useSelector(state => state.orders);
-    const {allOrders} = useSelector(state => state.allOrders);
     const { burgerIngridients } = useSelector(state => state.burgerIngridients);
     const location = useLocation();
     const { id } = useParams();
     let price = 0;
     if (!orders) return null
-    if (!allOrders) return null
-    const fasa = location.pathname === `/profile/orders/${id}` ? orders : allOrders;
-    const order = fasa.orders.find((item) => {
+    const order = orders.orders.find((item) => {
         return item._id === id
     })
 
 let asd = {};
-
 const dsa = () => {
     for (const item of order.ingredients) {
         if (!asd[item]) {
@@ -44,7 +40,7 @@ dsa()
                         if (b === i._id) {
                             price += i.price * asd[b]
                             return (
-                                <li className={style.items} key={Math.random()}>
+                                <li className={style.items} key={b}>
                                     <div className={style.img} ><img src={i.image} alt={i.name}/></div>
                                     <p className="text text_type_main-default">{i.name}</p>
                                     <p className={`${style.cost} text text_type_digits-default`}>{asd[b]} x {i.price} <CurrencyIcon /></p>

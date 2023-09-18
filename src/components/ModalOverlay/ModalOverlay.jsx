@@ -9,7 +9,7 @@ function ModalOverlay(props) {
     )
 }
 
-ModalOverlay.prototype = {
+ModalOverlay.propTypes = {
     handleClose: PropTypes.func
 }
 

@@ -20,7 +20,6 @@ import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Order from "../../pages/login/order";
 import { WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS } from "../../services/actions/ordersAction";
-import { WS_CONNECTION_START_ALL_ORDERS, WS_SEND_MESSAGE_ALL_ORDERS } from "../../services/actions/allOrders";
 import Feed from "../../pages/login/feed";
 
 function App() {
@@ -34,27 +33,16 @@ function App() {
     () => {
       dispatch(getBurgerIngridientsData());
       dispatch(checkUserAuth());
-      dispatch({
-        type: WS_CONNECTION_START_ALL_ORDERS
-      })
-      dispatch({
-        type: WS_SEND_MESSAGE_ALL_ORDERS
-      })
     }, []
 );
 
-React.useEffect(
-  () => {
-    if (user) {
-      dispatch({
-        type: WS_CONNECTION_START_ORDERS
-      })
-      dispatch({
-        type: WS_SEND_MESSAGE_ORDERS
-      })
-    }
-  }, [user]
-)
+const handleClose = (e) => {
+  if (location.pathname ==="/") {
+    navigate("/")
+  } else {
+    navigate(-1)
+  }
+}
 
 React.useEffect(
   () => {
@@ -82,9 +70,9 @@ return (
     </Routes>
     {background && (
       <Routes>
-        <Route path="/ingredients/:id" element={<Modal><IngredientDetailsPage /></Modal>} />
-        <Route path="/profile/orders/:id" element={<OnlyAuth component={<Modal><Order /></Modal>} />} />
-        <Route path="/feed/:id" element={<Modal><Order /></Modal>} />
+        <Route path="/ingredients/:id" element={<Modal handleClose={handleClose}><IngredientDetailsPage /></Modal>} />
+        <Route path="/profile/orders/:id" element={<Modal handleClose={handleClose}><Order /></Modal>} />
+        <Route path="/feed/:id" element={<Modal handleClose={handleClose}><Order /></Modal>} />
       </Routes>
     )}
   </div>

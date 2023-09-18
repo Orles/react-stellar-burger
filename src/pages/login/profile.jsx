@@ -9,6 +9,7 @@ import { userUpdates } from '../../utils/Api';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { func } from 'prop-types';
+import { WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS, WS_DISCONECT_ORDERS } from '../../services/actions/ordersAction';
 
 function Profile() {
     const location = useLocation();
@@ -21,6 +22,25 @@ function Profile() {
         text: user.name,
         password: ''
     })
+
+    React.useEffect(
+        () => {
+            if (user) {
+                dispatch({
+                    type: WS_CONNECTION_START_ORDERS,
+                    payload: `wss://norma.nomoreparties.space/orders?token=${localStorage.getItem("accessToken").replace('Bearer ', '')}`
+                })
+                dispatch({
+                    type: WS_SEND_MESSAGE_ORDERS
+                })
+            }
+            return () => {
+                dispatch({
+                    type: WS_DISCONECT_ORDERS
+                })
+            }
+        }, []
+    )
 
     const [passwordShown, setPasswordShown] = React.useState(true);
     const togglePassword = () => {
@@ -73,12 +93,15 @@ function Profile() {
         if (item.ingredients.length <= 6) {
             return (burgerIngridients.map((i) => {
                 for (const b of item.ingredients) {
-                    if (b === i._id) {
-                        return (
-                            <li className={style.miniLi} key={Math.random()}>
-                                <img src={i.image} alt={i.name} />
-                            </li>
-                        )
+                    for (const j in item.ingredients) {
+
+                        if (b === i._id) {
+                            return (
+                                <li className={style.miniLi} key={b + j}>
+                                    <img src={i.image} alt={i.name} />
+                                </li>
+                            )
+                        }
                     }
                 }
             }))
@@ -90,7 +113,7 @@ function Profile() {
                 burgerIngridients.forEach((i) => {
                     if (r === i._id) {
                         jsxElements.push(
-                            <li className={style.miniLi} key={Math.random()}>
+                            <li className={style.miniLi} key={r + index}>
                                 <img src={i.image} alt={i.name} className={style.img} />
                                 {index === 0 ? (
                                     <div className={style.vid}>
@@ -108,7 +131,9 @@ function Profile() {
     }
 
     const change = user.email !== value.email || user.name !== value.text || value.password !== ''
-    const inputRef = React.useRef(null)
+    const inputRef = React.useRef(null);
+
+    if (!orders) return null
     const fds = orders.orders.slice().reverse();
     return (
         <div className={style.table}>

@@ -9,7 +9,11 @@ export const socketMiddleware = (wsUrl) => {
             const { type, payload } = action;
 
             if (type === 'WS_CONNECTION_START_ORDERS') {
-                socket = new WebSocket(`${wsUrl}?token=${localStorage.getItem("accessToken").substr(7)}`);
+                socket = new WebSocket(payload);
+            }
+            // `${wsUrl}?token=${localStorage.getItem("accessToken").substr(7)}`
+            if (type === 'WS_DISCONECT_ORDERS') {
+                socket.close();
             }
             if (socket) {
                 socket.onopen = event => {

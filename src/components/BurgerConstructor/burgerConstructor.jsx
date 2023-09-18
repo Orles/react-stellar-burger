@@ -9,28 +9,29 @@ import { postOrdersDetailsIngredients } from '../../services/actions/orderDetail
 import { useDrop } from 'react-dnd';
 import { IngridientConstructor } from '../ingridientConstructor/ingridientConstructor';
 import { ORDER_DETAILS_OK } from '../../services/actions/orderDetailsAction';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function BurgerConstructor() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
     const {ok} = useSelector(state => state.orderDetails)
     const { burgerIngridients } = useSelector(state => state.burgerIngridients);
     const user = useSelector((store) => store.user.user);
     const { bun } = useSelector(state => state.burgerConstructor)
     const { ingridient } = useSelector(state => state.burgerConstructor)
 
-    React.useEffect(
-        () => {
-            const buns = burgerIngridients.find(item => item.type === 'bun');
+    // React.useEffect(
+    //     () => {
+    //         const buns = burgerIngridients.find(item => item.type === 'bun');
 
-            dispatch({
-                type: BURGER_CONSTRUCTOR_ADD_BUN,
-                payload: buns
-            })
+    //         dispatch({
+    //             type: BURGER_CONSTRUCTOR_ADD_BUN,
+    //             payload: buns
+    //         })
 
-        }, [burgerIngridients]
-    )
+    //     }, [burgerIngridients]
+    // )
 
 
 
@@ -98,9 +99,24 @@ function BurgerConstructor() {
             payload: sortedIngridient
         })
     }
-
+    const handleClose = () => {
+        if (location.pathname ==="/") {
+          navigate("/")
+        } else {
+          navigate(-1)
+        }
+        dispatch({
+            type: ORDER_DETAILS_OK,
+            payload: false
+        })
+      }
     return (
         <>
+        {!bun && 
+        <p>
+            Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа
+        </p>
+        }
             <div className={'ml-8 mb-4 mr-4 mr-4'}>
                 {bun && <ConstructorElement
                     type="top"
@@ -134,10 +150,10 @@ function BurgerConstructor() {
                 </p>
                 <Button htmlType="button" type="primary" size="large" onClick={() => {
                     click(ingridientId)
-                    }}>
+                    }} disabled={bun ? false : true}>
                     Оформить заказ
                 </Button>
-                {ok && <Modal>
+                {ok && <Modal handleClose={handleClose}>
                     <OrderDetails />
                 </Modal>}
             </div>

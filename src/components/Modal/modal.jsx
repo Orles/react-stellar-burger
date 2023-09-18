@@ -10,21 +10,15 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const modalRoot = document.getElementById("popup");
-function Modal({ children }) {
+function Modal({ children, handleClose }) {
   const location = useLocation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleClose = () => {
-    if (location.pathname ==="/") {
-      navigate("/")
-    } else {
-      navigate(-1)
-    }
-    dispatch({
-      type: ORDER_DETAILS_NO,
-      payload: false
-    })
-  }
+
+  const handleModalClick = (e) => {
+    // Предотвращаем всплытие события клика до верхних элементов
+    e.stopPropagation();
+  };
 
   React.useEffect(() => {
     const closeOnEscapeKey = e => e.key === "Escape" ? handleClose() : null;
@@ -34,17 +28,12 @@ function Modal({ children }) {
     };
   }, [handleClose]);
 
-
-  // if (!isOpen) {
-  //   return null
-  // }
-
   return ReactDOM.createPortal(
 
     <>
       <ModalOverlay handleClose={handleClose}>
         <div className={modalStyles.board}>
-          <div className={modalStyles.conteiner}>
+          <div className={modalStyles.conteiner} onClick={handleModalClick}>
             <button className={modalStyles.button} onClick={handleClose}>
               <CloseIcon type="primary" />
             </button>
@@ -58,10 +47,8 @@ function Modal({ children }) {
   );
 }
 
-Modal.prototype = {
-  handleClose: PropTypes.func,
-  isOpen: PropTypes.bool,
-  children: PropTypes.element.isRequired
+Modal.propTypes = { 
+  children: PropTypes.element.isRequired,
 }
 
 

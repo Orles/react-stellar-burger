@@ -10,7 +10,6 @@ import thunkMiddleware from 'redux-thunk'
 import { BrowserRouter as Router } from "react-router-dom";
 import { socketMiddleware } from "./services/middleware/socketMiddleware";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { socketMiddlewareAllOrders } from "./services/middleware/socketAllOrders";
 
 
 const composeEnhancers =
@@ -22,7 +21,7 @@ const composeEnhancers =
 // const asd = composeWithDevTools(applyMiddleware(socketMiddleware('wss://norma.nomoreparties.space/orders')))
 
 
-const store = createStore(rootReducer, compose(applyMiddleware(thunkMiddleware, socketMiddleware('wss://norma.nomoreparties.space/orders'), socketMiddlewareAllOrders('wss://norma.nomoreparties.space/orders/all'))));
+const store = createStore(rootReducer, compose(applyMiddleware(thunkMiddleware, socketMiddleware())));
 
 ReactDOM.render(
   <React.StrictMode>

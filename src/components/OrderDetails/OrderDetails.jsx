@@ -18,7 +18,7 @@ function OrderDetails(props) {
     )
 }
 
-OrderDetails.prototype = {
+OrderDetails.propTypes = {
     handleClose: PropTypes.func
 }
 

@@ -3,13 +3,32 @@ import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burge
 import { Link } from 'react-router-dom';
 import style from './login.module.css'
 import { useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { WS_DISCONECT_ORDERS, WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS } from '../../services/actions/ordersAction';
 
 function Feed() {
     const location = useLocation();
     const { burgerIngridients } = useSelector(state => state.burgerIngridients);
-    const { allOrders } = useSelector(state => state.allOrders);
-
-    if (!allOrders) return null
+    const dispatch = useDispatch();
+    const { orders } = useSelector(state => state.orders);
+    useEffect(
+        () => {
+            dispatch({
+                type: WS_CONNECTION_START_ORDERS,
+                payload: 'wss://norma.nomoreparties.space/orders/all'
+              })
+              dispatch({
+                type: WS_SEND_MESSAGE_ORDERS
+              })
+              return () => {
+                dispatch({
+                    type: WS_DISCONECT_ORDERS
+                })
+              }
+        }, []
+    )
+    if (!orders) return null
     function totalPrice(item) {
         let price = 0;
         item.map((b) => {
@@ -25,12 +44,15 @@ function Feed() {
         if (item.ingredients.length <= 6) {
             return (burgerIngridients.map((i) => {
                 for (const b of item.ingredients) {
-                    if (b === i._id) {
-                        return (
-                            <li className={style.miniLi} key={Math.random()}>
-                                <img src={i.image} alt={i.name} />
-                            </li>
-                        )
+                    for (const j in item.ingredients) {
+
+                        if (b === i._id) {
+                            return (
+                                <li className={style.miniLi} key={b + j}>
+                                    <img src={i.image} alt={i.name} />
+                                </li>
+                            )
+                        }
                     }
                 }
             }))
@@ -42,7 +64,7 @@ function Feed() {
                 burgerIngridients.forEach((i) => {
                     if (r === i._id) {
                         jsxElements.push(
-                            <li className={style.miniLi} key={Math.random()}>
+                            <li className={style.miniLi} key={r + index}>
                                 <img src={i.image} alt={i.name} className={style.img} />
                                 {index === 0 ? (
                                     <div className={style.vid}>
@@ -61,7 +83,7 @@ function Feed() {
     const ordersDone = [];
     const ordersPending = [];
     function orderStatus() {
-        allOrders.orders.map((i) => {
+        orders.orders.map((i) => {
             if (i.status === 'done') {
                 ordersDone.push(i.number);
             } else if (i.status === 'pending') {
@@ -77,7 +99,7 @@ function Feed() {
             <div className={style.taburet}>
                 <div className={style.stul}>
                     <ul className={`${style.ul} custom-scroll`}>
-                        {allOrders.orders.map((item) => {
+                        {orders.orders.map((item) => {
                             let price = 0;
                             return (
                                 <Link to={`/feed/${item._id}`} state={{ background: location }} className={style.color} key={item._id}>
@@ -108,9 +130,9 @@ function Feed() {
                         <div className={style.tableFeed}>
                             <h3 className="text text_type_main-medium mb-6">Готовы:</h3>
                             <ul className={style.listFeed}>
-                                {ordersDone.map((i) => {
+                                {ordersDone.map((i, index) => {
                                     return (
-                                        <li className="text text_type_digits-default" key={Math.random()}>{i}</li>
+                                        <li className="text text_type_digits-default" key={index}>{i}</li>
                                     )
                                 })}
                             </ul>
@@ -118,18 +140,18 @@ function Feed() {
                         <div>
                             <h3 className="text text_type_main-medium mb-6">В работе:</h3>
                             <ul className={style.listFeed}>
-                            {ordersPending.map((i) => {
+                            {ordersPending.map((i, index) => {
                                     return (
-                                        <li className={`${style.white} text text_type_digits-default`} key={Math.random()}>{i}</li>
+                                        <li className={`${style.white} text text_type_digits-default`} key={index}>{i}</li>
                                     )
                                 })}
                             </ul>
                         </div>
                     </div>
                     <p className="text text_type_main-medium">Выполнено за все время:</p>
-                    <p className="text text_type_digits-large mb-15">{allOrders.total}</p>
+                    <p className="text text_type_digits-large mb-15">{orders.total}</p>
                     <p className="text text_type_main-medium">Выполнено за сегодня:</p>
-                    <p className="text text_type_digits-large">{allOrders.totalToday}</p>
+                    <p className="text text_type_digits-large">{orders.totalToday}</p>
                 </div>
             </div>
         </>

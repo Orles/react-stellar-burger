@@ -4,6 +4,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { BURGER_CONSTRUCTOR_DELETE } from '../../services/actions/burgerConstructorAction';
 import BurgerConstructorStyle from '../BurgerConstructor/burgerConstructor.module.css';
+import PropTypes from 'prop-types';
 
 export function IngridientConstructor({ item, moveIngridient }) {
     const dispatch = useDispatch();
@@ -60,4 +61,17 @@ export function IngridientConstructor({ item, moveIngridient }) {
             </li>
         </>
     )
+}
+
+IngridientConstructor.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string,
+        name: PropTypes.string,
+        type: PropTypes.string,
+        price: PropTypes.number,
+        image: PropTypes.string,
+        __v: PropTypes.number,
+    }),
+
+    moveIngridient: PropTypes.func
 }

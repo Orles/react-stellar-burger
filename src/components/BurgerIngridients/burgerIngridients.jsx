@@ -30,7 +30,6 @@ function BurgerIngridients() {
 
     React.useEffect(
         () => {
-            dispatch(getBurgerIngridientsData());
             dispatch({
                 type: BURGER_CONSTRUCTOR_ADD_BUN,
                 payload: bun

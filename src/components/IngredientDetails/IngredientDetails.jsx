@@ -38,15 +38,4 @@ function IngredientDetails() {
     )
 }
 
-IngredientDetails.prototype = {
-    data: PropTypes.shape({
-        image: PropTypes.string,
-        name: PropTypes.string,
-        calories: PropTypes.number,
-        proteins: PropTypes.number,
-        fat: PropTypes.number,
-        carbohydrates: PropTypes.number
-    })
-}
-
 export default IngredientDetails;
