@@ -1,25 +1,25 @@
 import styles from "./app.module.css";
-import AppHeader from "../AppHeader/appHeader";
+import AppHeader from "../appHeader/appHeader";
 import { Routes, Route, useLocation } from 'react-router-dom';
 // import { Route, Routes, useLocation } from "react-router-dom";
 import IngredientDetailsPage from "../../pages/IngredientDetailsPage";
 import Home from "../../pages/home";
 import Login from "../../pages/login/login";
 import Register from "../../pages/login/register";
-import ForgotPassword from "../../pages/login/forgot-password";
-import ResetPassword from "../../pages/login/reset-password";
+import ForgotPassword from "../../pages/login/forgotPassword";
+import ResetPassword from "../../pages/login/resetPassword";
 import Profile from "../../pages/login/profile";
-import Modal from "../Modal/modal";
+import Modal from "../modal/modal";
 import { useDispatch } from 'react-redux';
 import { getBurgerIngridientsData } from '../../services/actions/burgerIngridientsAction';
 import React from 'react';
-import { OnlyAuth, OnlyUnAuth } from "../../pages/protected-route/protected-route";
+import { OnlyAuth, OnlyUnAuth } from "../../pages/protectedRoute/protectedRoute";
 import { checkUserAuth } from "../../utils/Api";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Order from "../../pages/login/order";
-import { WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS } from "../../services/actions/ordersAction";
+import { WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS, WS_DISCONECT_ORDERS } from "../../services/actions/ordersAction";
 import Feed from "../../pages/login/feed";
 
 function App() {

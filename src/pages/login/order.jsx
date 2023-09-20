@@ -3,29 +3,69 @@ import { useSelector } from "react-redux";
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './order.module.css';
 import { useLocation } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS, WS_DISCONECT_ORDERS } from "../../services/actions/ordersAction";
 
 function Order() {
+    const user = useSelector((store) => store.user.user);
+    const dispatch = useDispatch()
+    const { id } = useParams();
+    const location = useLocation();
+    const background = location.state && location.state.background;
+    React.useEffect(
+        () => {
+            if (!background && location.pathname === `/feed/${id}`) {
+                dispatch({
+                    type: WS_CONNECTION_START_ORDERS,
+                    payload: 'wss://norma.nomoreparties.space/orders/all'
+                  })
+                  dispatch({
+                    type: WS_SEND_MESSAGE_ORDERS
+                })
+                return () => {
+                  dispatch({
+                      type: WS_DISCONECT_ORDERS
+                  })
+            }
+            } else if (!background && location.pathname === `/profile/orders/${id}`){
+                if (user) {
+                    dispatch({
+                        type: WS_CONNECTION_START_ORDERS,
+                        payload: `wss://norma.nomoreparties.space/orders?token=${localStorage.getItem("accessToken").replace('Bearer ', '')}`
+                    })
+                    dispatch({
+                        type: WS_SEND_MESSAGE_ORDERS
+                    })
+                }
+                return () => {
+                    dispatch({
+                        type: WS_DISCONECT_ORDERS
+                    })
+                }
+            }
+        }, [location.pathname, id, user]
+    )
     const { orders } = useSelector(state => state.orders);
     const { burgerIngridients } = useSelector(state => state.burgerIngridients);
-    const location = useLocation();
-    const { id } = useParams();
     let price = 0;
+    console.log(orders)
     if (!orders) return null
     const order = orders.orders.find((item) => {
         return item._id === id
     })
-
-let asd = {};
-const dsa = () => {
-    for (const item of order.ingredients) {
-        if (!asd[item]) {
-            asd[item] = 0;
+    if (!order) return null
+    let asd = {};
+    const dsa = () => {
+        for (const item of order.ingredients) {
+            if (!asd[item]) {
+                asd[item] = 0;
+            }
+            asd[item]++;
         }
-        asd[item]++;
+        return asd;
     }
-    return asd;
-}
-dsa()
+    dsa()
 
     return (
         <div className={`${style.table} mt-30`}>
@@ -35,13 +75,13 @@ dsa()
             <p className="text text_type_main-medium mb-6">Состав:</p>
             <ul className={`${style.list} custom-scroll`}>
                 {Object.keys(asd).map((b) => {
-               
+
                     return (burgerIngridients.map((i) => {
                         if (b === i._id) {
                             price += i.price * asd[b]
                             return (
                                 <li className={style.items} key={b}>
-                                    <div className={style.img} ><img src={i.image} alt={i.name}/></div>
+                                    <div className={style.img} ><img src={i.image} alt={i.name} /></div>
                                     <p className="text text_type_main-default">{i.name}</p>
                                     <p className={`${style.cost} text text_type_digits-default`}>{asd[b]} x {i.price} <CurrencyIcon /></p>
                                 </li>

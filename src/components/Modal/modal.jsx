@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import modalStyles from "./modal.module.css";
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import ModalOverlay from "../modalOverlay/modalOverlay";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import { ORDER_DETAILS_NO } from "../../services/actions/orderDetailsAction";

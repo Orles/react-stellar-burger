@@ -1,4 +1,4 @@
-import ModalOverlayStyle from './ModalOverlay.module.css'
+import ModalOverlayStyle from './modalOverlay.module.css'
 import PropTypes from 'prop-types';
 
 function ModalOverlay(props) {

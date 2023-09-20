@@ -1,8 +1,8 @@
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorStyle from './burgerConstructor.module.css';
-import Modal from '../Modal/modal';
+import Modal from '../modal/modal';
 import React from 'react';
-import OrderDetails from '../OrderDetails/OrderDetails';
+import OrderDetails from '../orderDetails/orderDetails';
 import { useSelector, useDispatch } from 'react-redux';
 import { BURGER_CONSTRUCTOR_ADD_BUN, BURGER_CONSTRUCTOR_ADD_INGRIDIENTS, BURGER_CONSTRUCTOR_MOVE } from '../../services/actions/burgerConstructorAction';
 import { postOrdersDetailsIngredients } from '../../services/actions/orderDetailsAction';
