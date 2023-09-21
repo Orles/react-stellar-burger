@@ -1,24 +1,6 @@
 import { Middleware, MiddlewareAPI } from 'redux';
 
-import { WS_CONNECTION_START_ORDERS,
-    WS_CONNECTION_SUCCESS_ORDERS,
-    WS_CONNECTION_ERROR_ORDERS,
-    WS_GET_MESSAGE_ORDERS,
-    WS_CONNECTION_CLOSED_ORDERS,
-    WS_SEND_MESSAGE_ORDERS,
-    WS_DISCONECT_ORDERS } from '../actions/ordersAction';
-
-const wsActions = {
-    wsInit: WS_CONNECTION_START_ORDERS,
-    wsClose: WS_DISCONECT_ORDERS,
-    wsSendMessage: WS_SEND_MESSAGE_ORDERS,
-    onOpen: WS_CONNECTION_SUCCESS_ORDERS,
-    onClose: WS_CONNECTION_CLOSED_ORDERS,
-    onError: WS_CONNECTION_ERROR_ORDERS,
-    onMessage: WS_GET_MESSAGE_ORDERS
-  };
-
-export const socketMiddleware = (wsUrl) => {
+export const socketMiddleware = (wsActions) => {
     return store => {
         let socket = null;
         

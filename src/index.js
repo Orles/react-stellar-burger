@@ -10,7 +10,7 @@ import thunkMiddleware from 'redux-thunk'
 import { BrowserRouter as Router } from "react-router-dom";
 import { socketMiddleware } from "./services/middleware/socketMiddleware";
 import { composeWithDevTools } from "redux-devtools-extension";
-
+import { wsActions } from "./services/actions/ordersAction";
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -21,7 +21,7 @@ const composeEnhancers =
 // const asd = composeWithDevTools(applyMiddleware(socketMiddleware('wss://norma.nomoreparties.space/orders')))
 
 
-const store = createStore(rootReducer, compose(applyMiddleware(thunkMiddleware, socketMiddleware())));
+const store = createStore(rootReducer, compose(applyMiddleware(thunkMiddleware, socketMiddleware(wsActions))));
 
 ReactDOM.render(
   <React.StrictMode>

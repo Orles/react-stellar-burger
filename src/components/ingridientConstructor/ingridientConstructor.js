@@ -3,7 +3,7 @@ import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { BURGER_CONSTRUCTOR_DELETE } from '../../services/actions/burgerConstructorAction';
-import BurgerConstructorStyle from '../BurgerConstructor/burgerConstructor.module.css';
+import BurgerConstructorStyle from '../burgerConstructor/burgerConstructor.module.css';
 import PropTypes from 'prop-types';
 
 export function IngridientConstructor({ item, moveIngridient }) {
