@@ -12,21 +12,26 @@ const onResponce = (res) => {
 export function getData() {
   return fetch(`${URL}/ingredients`)
     .then((res) => onResponce(res))
+    .catch(err => console.log(err))
 }
 
 export function postIngridients(ingredients) {
   return fetch(`${URL}/orders`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      authorization: localStorage.getItem("accessToken"),
+     },
     body: JSON.stringify({
       ingredients
     })
   }).then((res) => onResponce(res))
+  .catch(err => console.log(err))
 }
 
 export function registerUser(name, email, password) {
   return (dispatch) => {
-    return fetch('https://norma.nomoreparties.space/api/auth/register', {
+    return fetch(`${URL}/auth/register`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -62,11 +67,12 @@ export function registerUser(name, email, password) {
         });
       });
   }
+  
 }
 
 export const login = (email, password) => {
   return (dispatch) => {
-    return fetch("https://norma.nomoreparties.space/api/auth/login", {
+    return fetch(`${URL}/auth/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -104,7 +110,7 @@ export const login = (email, password) => {
 
 export const out = () => {
   return (dispatch) => {
-    return fetch("https://norma.nomoreparties.space/api/auth/logout", {
+    return fetch(`${URL}/auth/logout`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -140,7 +146,7 @@ export const out = () => {
 };
 
 const refreshToken = () => {
-  return fetch("https://norma.nomoreparties.space/api/auth/token", {
+  return fetch(`${URL}/auth/token`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -150,6 +156,7 @@ const refreshToken = () => {
       token: localStorage.getItem("refreshToken")
     })
   }).then(res => onResponce(res))
+  .catch(err => console.log(err))
 };
 
 const fetchWithRefresh = async (url, options) => {
@@ -175,7 +182,7 @@ const fetchWithRefresh = async (url, options) => {
 
 export const getUser = () => {
   return (dispatch) => {
-    return fetchWithRefresh("https://norma.nomoreparties.space/api/auth/user", {
+    return fetchWithRefresh(`${URL}/auth/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -225,7 +232,7 @@ export const checkUserAuth = () => {
 
 export const fogotPassword = (email) => {
   return (dispatch) => {
-    return fetch("https://norma.nomoreparties.space/api/password-reset", {
+    return fetch(`${URL}/password-reset`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -246,12 +253,13 @@ export const fogotPassword = (email) => {
         } else {
           return Promise.reject("Ошибка данных с сервера");
         }
-      });
+      })
+      .catch(err => console.log(err))
   };
 };
 
 export const resetPassword = (password, token) => {
-    return fetch("https://norma.nomoreparties.space/api/password-reset/reset", {
+    return fetch(`${URL}/password-reset/reset`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -263,12 +271,13 @@ export const resetPassword = (password, token) => {
       })
     },
     )
-      .then(res => onResponce(res));
+      .then(res => onResponce(res))
+      .catch(err => console.log(err))
 };
 
 export const userUpdates = (email, password, name) => {
   return (dispatch) => {
-  return fetch("https://norma.nomoreparties.space/api/auth/user", {
+  return fetch(`${URL}/auth/user`, {
     method: "PATCH",
     headers: {
       authorization: localStorage.getItem("accessToken"),
@@ -298,5 +307,6 @@ export const userUpdates = (email, password, name) => {
       } else {
         return Promise.reject("Ошибка данных с сервера");
       }
-    });
+    })
+    .catch(err => console.log(err))
 }};

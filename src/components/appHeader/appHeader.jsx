@@ -18,10 +18,10 @@ function AppHeader() {
                         Конструктор
                     </NavLink>
 
-                    <NavLink to="/lenta" className={({ isActive }) =>
+                    <NavLink to="/feed" className={({ isActive }) =>
                         isActive ? `${AppHeaderStyle.activlink} text text_type_main-default pl-5 pr-5` : `${AppHeaderStyle.link} text text_type_main-default text_color_inactive pl-5 pr-5`
                     }>
-                        <ListIcon type={location.pathname === '/lenta' ? 'primary' : 'secondary'} />
+                        <ListIcon type={location.pathname === '/feed' ? 'primary' : 'secondary'} />
                         Лента заказов
                     </NavLink>
                 </nav>

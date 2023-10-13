@@ -1,5 +1,5 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
-import BurgerIngridientsStyle from '../BurgerIngridients/burgerIngridients.module.css'
+import BurgerIngridientsStyle from '../burgerIngridients/burgerIngridients.module.css'
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
@@ -41,7 +41,7 @@ function Ingridient(props) {
     )
 }
 
-Ingridient.prototype = {
+Ingridient.propTypes = {
     data: PropTypes.shape({
         _id: PropTypes.string,
         name: PropTypes.string,

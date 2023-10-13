@@ -1,4 +1,4 @@
-import IngredientDetails from "../components/IngredientDetails/IngredientDetails";
+import IngredientDetails from "../components/ingredientDetails/ingredientDetails";
 
 function IngredientDetailsPage() {
     return (

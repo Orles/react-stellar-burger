@@ -1,4 +1,4 @@
-import IngredientDetailsStyle from './IngredientDetails.module.css'
+import IngredientDetailsStyle from './ingredientDetails.module.css'
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -36,17 +36,6 @@ function IngredientDetails() {
             </ul>
         </div>
     )
-}
-
-IngredientDetails.prototype = {
-    data: PropTypes.shape({
-        image: PropTypes.string,
-        name: PropTypes.string,
-        calories: PropTypes.number,
-        proteins: PropTypes.number,
-        fat: PropTypes.number,
-        carbohydrates: PropTypes.number
-    })
 }
 
 export default IngredientDetails;

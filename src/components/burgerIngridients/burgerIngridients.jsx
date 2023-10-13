@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngridientsStyle from './burgerIngridients.module.css';
-import Modal from '../Modal/modal';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredientDetails/ingredientDetails';
 import Ingridient from '../ingridient/ingridient';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerIngridientsData } from '../../services/actions/burgerIngridientsAction';
@@ -30,7 +30,6 @@ function BurgerIngridients() {
 
     React.useEffect(
         () => {
-            dispatch(getBurgerIngridientsData());
             dispatch({
                 type: BURGER_CONSTRUCTOR_ADD_BUN,
                 payload: bun
