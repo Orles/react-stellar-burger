@@ -1,0 +1,5 @@
+export const INGREDIENT_DETAILS_MODAL_CLOSE: 'INGREDIENT_DETAILS_MODAL_CLOSE' = 'INGREDIENT_DETAILS_MODAL_CLOSE';
+
+export interface IingredientDetailsModalOpen {
+    readonly type: typeof INGREDIENT_DETAILS_MODAL_CLOSE;
+}
