@@ -2,7 +2,7 @@ import { Input, Button, EmailInput } from '@ya.praktikum/react-developer-burger-
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import style from './login.module.css'
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type";
 import { fogotPassword } from '../../utils/Api';  
 
 const ForgotPassword: FC = () => {

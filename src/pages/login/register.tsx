@@ -2,8 +2,7 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './login.module.css'
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch } from "../../utils/type";
 import { registerUser } from '../../utils/Api';
 
 

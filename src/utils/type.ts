@@ -1,10 +1,21 @@
+import { ThunkDispatch, ThunkAction } from "redux-thunk";
 import { store } from "..";
+import { TBurgerConstructorActions } from "../services/actions/burgerConstructorAction";
+import { TGetBurgerIngridients } from "../services/actions/burgerIngridientsAction";
+import { IingredientDetailsModalOpen } from "../services/actions/ingridienrDetailsAction";
+import { TOrdersDetails } from "../services/actions/orderDetailsAction";
+import { TWSActions } from "../services/actions/ordersAction";
+import { TSet } from "../services/actions/userAction";
+import { rootReducer } from "../services/reducers";
 import { IInitialStateConstrctor } from "../services/reducers/burgerConstructorReducer";
 import { IInitialStateIngridient } from "../services/reducers/burgerIngridientsReducer";
 import { IInitialStateIngtidientDetails } from "../services/reducers/ingridienrDetailsReducer";
 import { IInetStateOrderDetails } from "../services/reducers/orderDetailsReducer";
 import { IInitStateOrders } from "../services/reducers/ordersReducer";
 import { IInitStateUser } from "../services/reducers/userReducer";
+import { TypedUseSelectorHook, useDispatch as dispatchHook,
+  useSelector as selectorHook} from "react-redux";
+import { Action, ActionCreator } from "@reduxjs/toolkit";
 
 export interface Iingredient {
   _id: string;
@@ -78,3 +89,23 @@ export interface IWSMiddlewareActions {
   onError: string;
   onMessage: string;
 };
+
+export type AppState = ReturnType<typeof rootReducer>;
+
+type AppActions =
+  | TBurgerConstructorActions
+  | TGetBurgerIngridients
+  | IingredientDetailsModalOpen
+  | TOrdersDetails
+  | TWSActions
+  | TSet;
+
+  export type AppThunk<TReturn = void> = ActionCreator<
+  ThunkAction<TReturn, Action, RootState, AppActions>
+  >;
+
+  export type AppDispatch = typeof store.dispatch;
+
+  export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+
+  export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>(); 

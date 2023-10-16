@@ -1,5 +1,5 @@
 import { SET_USER, SET_AUTHCHECKED, TOGGLE_OK } from "../services/actions/userAction";
-import { Dispatch } from "redux";
+import { AppDispatch } from "./type";
 
 // const navigate = useNavigate();
 const URL = 'https://norma.nomoreparties.space/api';
@@ -37,7 +37,7 @@ export function postIngridients(ingredients: string[]) {
 }
 
 export function registerUser(name: string, email: string, password: string) {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     return fetch(`${URL}/auth/register`, {
       method: "POST",
       headers: {
@@ -78,7 +78,7 @@ export function registerUser(name: string, email: string, password: string) {
 }
 
 export const login = (email: string, password: string) => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     return fetch(`${URL}/auth/login`, {
       method: "POST",
       headers: {
@@ -116,7 +116,7 @@ export const login = (email: string, password: string) => {
 };
 
 export const out = () => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     return fetch(`${URL}/auth/logout`, {
       method: "POST",
       headers: {
@@ -196,7 +196,7 @@ const fetchWithRefresh = async (url: string, options: IfetchOptions) => {
 };
 
 export const getUser = () => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     const accessToken = localStorage.getItem("accessToken");
     const headers: IfetchOptions['headers'] = {
       'Content-Type': 'application/json',
@@ -250,7 +250,7 @@ export const checkUserAuth = () => {
 };
 
 export const fogotPassword = (email: string) => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     return fetch(`${URL}/password-reset`, {
       method: "POST",
       headers: {
@@ -295,7 +295,7 @@ export const resetPassword = (password: string, token: string) => {
 };
 
 export const userUpdates = (email: string, password: string, name: string) => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatch) => {
     const accessToken = localStorage.getItem("accessToken");
     const headers: HeadersInit = {
       'Content-Type': 'application/json',

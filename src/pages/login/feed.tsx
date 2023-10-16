@@ -2,9 +2,9 @@ import { useLocation } from 'react-router-dom';
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 import style from './login.module.css'
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type";
 import React, { FC, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../utils/type';
 import { WS_DISCONECT_ORDERS, WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS } from '../../services/actions/ordersAction';
 import { RootState, Iingredient, Iorder } from '../../utils/type';
 

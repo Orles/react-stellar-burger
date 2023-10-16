@@ -6,7 +6,7 @@ export const TOGGLE_OK: 'TOGGLE_OK' = 'TOGGLE_OK'
 
 export interface ISetUser {
     readonly type: typeof SET_USER;
-    readonly payload: IUserData;
+    readonly payload: IUserData | null;
 }
 
 export interface ISetAuthchecked {

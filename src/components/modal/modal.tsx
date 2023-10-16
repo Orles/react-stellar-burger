@@ -3,11 +3,7 @@ import ReactDOM from 'react-dom';
 import modalStyles from "./modal.module.css";
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from "../modalOverlay/modalOverlay";
-import PropTypes from 'prop-types';
-import { useNavigate } from "react-router-dom";
-import { ORDER_DETAILS_NO } from "../../services/actions/orderDetailsAction";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+
 interface Imodal {
   children: ReactNode;
   handleClose: () => void;

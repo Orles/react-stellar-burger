@@ -4,7 +4,7 @@ import BurgerIngridientsStyle from './burgerIngridients.module.css';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredientDetails/ingredientDetails';
 import Ingridient from '../ingridient/ingridient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/type';
 import { getBurgerIngridientsData } from '../../services/actions/burgerIngridientsAction';
 import { INGREDIENT_DETAILS_MODAL_CLOSE } from '../../services/actions/ingridienrDetailsAction';
 import { BURGER_CONSTRUCTOR_ADD_BUN } from '../../services/actions/burgerConstructorAction';

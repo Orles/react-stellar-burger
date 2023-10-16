@@ -1,9 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type";
 import React, { FC } from "react";
 import { checkUserAuth } from "../../utils/Api";
 import { SET_AUTHCHECKED } from "../../services/actions/userAction";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../utils/type';
 import { RootState } from "../../utils/type";
 
 interface IprotectedProps {

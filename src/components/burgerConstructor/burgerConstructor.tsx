@@ -3,14 +3,13 @@ import BurgerConstructorStyle from './burgerConstructor.module.css';
 import Modal from '../modal/modal';
 import React from 'react';
 import OrderDetails from '../orderDetails/orderDetails';
-import { useSelector, useDispatch } from 'react-redux';
 import { BURGER_CONSTRUCTOR_ADD_BUN, BURGER_CONSTRUCTOR_ADD_INGRIDIENTS, BURGER_CONSTRUCTOR_MOVE } from '../../services/actions/burgerConstructorAction';
 import { postOrdersDetailsIngredients } from '../../services/actions/orderDetailsAction';
 import { useDrop } from 'react-dnd';
 import { IngridientConstructor } from '../ingridientConstructor/ingridientConstructor';
 import { ORDER_DETAILS_OK } from '../../services/actions/orderDetailsAction';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Iingredient } from '../../utils/type';
+import { Iingredient, useDispatch, useSelector  } from '../../utils/type';
 import { RootState } from '../../utils/type';
 import { FC } from 'react';
 
@@ -18,11 +17,11 @@ const BurgerConstructor: FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const {ok} = useSelector((state: RootState) => state.orderDetails)
+    const {ok} = useSelector((state) => state.orderDetails)
     // const { burgerIngridients } = useSelector(state => state.burgerIngridients);
-    const user = useSelector((store: RootState) => store.user.user);
-    const { bun } = useSelector((state: RootState) => state.burgerConstructor)
-    const { ingridient } = useSelector((state: RootState) => state.burgerConstructor)
+    const user = useSelector((store) => store.user.user);
+    const { bun } = useSelector((state) => state.burgerConstructor)
+    const { ingridient } = useSelector((state) => state.burgerConstructor)
 
     const ingridientId = ingridient.map((item:Iingredient) => {
         return item._id

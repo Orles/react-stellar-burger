@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type";
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './order.module.css';
 import { useLocation } from "react-router-dom";
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type";
 import { WS_CONNECTION_START_ORDERS, WS_SEND_MESSAGE_ORDERS, WS_DISCONECT_ORDERS } from "../../services/actions/ordersAction";
 import { Iingredient, RootState } from "../../utils/type";
 

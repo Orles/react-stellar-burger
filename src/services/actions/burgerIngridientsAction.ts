@@ -1,6 +1,6 @@
 import { getData } from "../../utils/Api";
-import { Dispatch } from "redux";
 import { Iingredient } from "../../utils/type";
+import { AppDispatch } from "../../utils/type"; 
 
 export const GET_BURGER_INGRIDIENTS_REQUEST:  'GET_BURGER_INGRIDIENTS_REQUEST'= 'GET_BURGER_INGRIDIENTS_REQUEST';
 export const GET_BURGER_INGRIDIENTS_FAILED: 'GET_BURGER_INGRIDIENTS_FAILED' = 'GET_BURGER_INGRIDIENTS_FAILED';
@@ -25,7 +25,7 @@ export type TGetBurgerIngridients =
 | IGetBurgerIngridientsSuccess;
 
 export const getBurgerIngridientsData = () => {
-    return function (dispatch: Dispatch) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: GET_BURGER_INGRIDIENTS_REQUEST
         })

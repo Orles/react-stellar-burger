@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import style from './login.module.css'
 import { login } from '../../utils/Api';
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type";
 
 const Login: FC = () => {
     const dispatch = useDispatch();

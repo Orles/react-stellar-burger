@@ -1,6 +1,6 @@
 import { postIngridients } from "../../utils/Api";
 import { Iingredient, Iorder } from "../../utils/type";
-import { Dispatch } from "redux";
+import { AppDispatch } from "../../utils/type";
 
 export const ORDER_DETAILS_SUCCESS: 'ORDER_DETAILS_SUCCESS' = 'ORDER_DETAILS_SUCCESS';
 export const ORDER_DETAILS_REQUEST: 'ORDER_DETAILS_REQUEST' = 'ORDER_DETAILS_REQUEST';
@@ -35,7 +35,7 @@ export type TOrdersDetails =
 | IOrdersDetailsNo;
 
 export const postOrdersDetailsIngredients = (ingridients: string[]) => {
-    return function (dispatch: Dispatch) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: ORDER_DETAILS_REQUEST
         })

@@ -2,9 +2,9 @@ import { Input, EmailInput, PasswordInput, Button, CurrencyIcon, FormattedDate }
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './login.module.css'
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type";
 import { out } from '../../utils/Api';
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type";
 import { userUpdates } from '../../utils/Api';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';

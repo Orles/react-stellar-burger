@@ -1,7 +1,7 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerIngridientsStyle from '../burgerIngridients/burgerIngridients.module.css'
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../utils/type';
 import { useDrag } from 'react-dnd';
 import { RootState, Iingredient } from '../../utils/type';
 import { FC } from 'react';

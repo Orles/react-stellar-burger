@@ -1,7 +1,7 @@
 import OrderDetailsStyle from './orderDetails.module.css'
 import img from '../../image/done.svg'
 import PropTypes from 'prop-types';
-import {useSelector} from 'react-redux';
+import {useSelector} from '../../utils/type';
 import { FC } from 'react';
 import { RootState } from '../../utils/type';
 
